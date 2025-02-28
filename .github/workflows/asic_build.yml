@@ -32,6 +32,4 @@ jobs:
           magic -dnull -noconsole -T techfile.tech scripts/drc_lvs.tcl
 
       - name: Upload Results
-        uses: actions/upload-artifact@v4
-          name: asic_results
-          path: results/
+        uses: actions/upload-artifact@v4  name: asic_results         path: results/
