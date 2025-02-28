@@ -13,23 +13,34 @@ jobs:
       - name: Install OpenROAD & Yosys
         run: |
           sudo apt update
-          sudo apt install -y openroad yosys magic klayout
+          sudo apt install -y \
+            openroad yosys magic klayout
 
       - name: Run Synthesis (Yosys)
         run: |
-          yosys -p "read_verilog src/*.v; synth -top TopModule; write_json synth.json"
+          yosys -p \
+            "read_verilog src/*.v; \
+             synth -top TopModule; \
+             write_json synth.json"
 
       - name: Run Floorplanning & Placement (OpenROAD)
         run: |
-          openroad -script scripts/floorplan.tcl
+          openroad -script \
+            scripts/floorplan.tcl
 
       - name: Run Routing
         run: |
-          openroad -script scripts/routing.tcl
+          openroad -script \
+            scripts/routing.tcl
 
       - name: Perform DRC & LVS Checks
         run: |
-          magic -dnull -noconsole -T techfile.tech scripts/drc_lvs.tcl
+          magic -dnull -noconsole \
+            -T techfile.tech \
+            scripts/drc_lvs.tcl
 
       - name: Upload Results
-        uses: actions/upload-artifact@v4  name: asic_results         path: results/
+        uses: actions/upload-artifact@v4
+        with:
+          name: asic_results
+          path: results/
