@@ -1,0 +1,3 @@
+[submodule "NONA-ASIC-PROCESSOR-DESIGN"]
+    path = NONA-ASIC-PROCESSOR-DESIGN
+    url = <URL to your submodule repository>
