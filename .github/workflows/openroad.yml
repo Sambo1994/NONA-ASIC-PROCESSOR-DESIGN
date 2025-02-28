@@ -1,0 +1,31 @@
+on: [push, pull_request]
+
+jobs:
+  openroad:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install OpenROAD
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential cmake tclsh swig
+        git clone --recursive https://github.com/The-OpenROAD-Project/OpenROAD.git
+        cd OpenROAD
+        ./setup.sh
+        make
+        sudo make install
+
+    - name: Run OpenROAD Flow
+      run: |
+        cd OpenROAD-flow
+        make DESIGN_CONFIG=designs/NineCoreProcessor.mk
+
+    - name: Upload results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ASIC_Design_Results
+        path: results/
+
