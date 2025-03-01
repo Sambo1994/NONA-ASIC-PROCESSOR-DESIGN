@@ -10,11 +10,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install OpenROAD & Yosys
+      - name: Install Dependencies
         run: |
           sudo apt update
-          sudo apt install -y \
-            openroad yosys magic klayout
+          sudo apt install -y software-properties-common
+          sudo add-apt-repository -y ppa:openroad/ppa
+          sudo apt update
+          sudo apt install -y openroad yosys magic klayout
 
       - name: Run Synthesis (Yosys)
         run: |
