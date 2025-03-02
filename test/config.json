@@ -1,0 +1,7 @@
+{
+    "DESIGN_NAME": "ninecoreprocessor",
+    "VERILOG_FILES": ["ninecoreprocessor.v"],
+    "CLOCK_PERIOD": 10,
+    "CLOCK_PORT": "clk",
+    "SYNTH_STRATEGY": "AREA 0"
+}
